@@ -1,0 +1,4 @@
+$ lake env lean verification/PrincipalAxioms.lean
+'Runcorn.varyingAnnuli' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Runcorn.fixedAnnulus' depends on axioms: [propext, Classical.choice, Quot.sound]
+Exit status 0

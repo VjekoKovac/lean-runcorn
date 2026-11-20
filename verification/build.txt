@@ -1,0 +1,68 @@
+Build in a fresh project directory. Local project build artifacts were absent.
+The pinned external Lean packages and their Mathlib cache were shared.
+
+$ LEAN_NUM_THREADS=4 lake build Challenge Solution
+✔ [2879/2899] Built Runcorn.Definitions (3.7s)
+✔ [2881/2899] Built Runcorn.Algebra (4.1s)
+✔ [2882/2899] Built Runcorn.SpecialPair (4.3s)
+⚠ [2883/2899] Built Challenge (4.6s)
+warning: Challenge.lean:177:8: declaration uses `sorry`
+warning: Challenge.lean:183:8: declaration uses `sorry`
+✔ [2885/2899] Built Runcorn.TestRegularity (2.6s)
+✔ [2888/2899] Built Runcorn.Varying (2.7s)
+✔ [2889/2940] Built Runcorn.Expansion (3.4s)
+✔ [3075/3092] Built Runcorn.FischerPairing (2.2s)
+✔ [3080/3093] Built Runcorn.Decay (2.6s)
+✔ [3082/3093] Built Runcorn.Fixed (5.3s)
+✔ [3083/3095] Built Runcorn.PolynomialCalculus (4.1s)
+✔ [3084/3098] Built Runcorn.Symbol (2.3s)
+✔ [3096/3108] Built Runcorn.Quadric (2.8s)
+✔ [3098/3108] Built Runcorn.Separated (3.9s)
+✔ [3100/3108] Built Runcorn.LowModes (3.8s)
+✔ [3101/3126] Built Runcorn.Kelvin (5.1s)
+✔ [3119/3207] Built Runcorn.NullSpan (3.4s)
+✔ [3197/3208] Built Runcorn.Necessity (3.5s)
+✔ [3199/3208] Built Runcorn.SphereDensity (3.5s)
+✔ [3201/3222] Built Runcorn.PolynomialHomogeneity (3.3s)
+✔ [3209/3222] Built Runcorn.Cutoff (3.4s)
+✔ [3213/3223] Built Runcorn.Restriction (2.0s)
+✔ [3214/3235] Built Runcorn.PolarMeasure (3.6s)
+✔ [3221/3235] Built Runcorn.AngularSpan (3.7s)
+✔ [3222/3235] Built Runcorn.AngularLowSpace (6.2s)
+✔ [3223/3238] Built Runcorn.Orthogonality (6.0s)
+✔ [3224/3238] Built Runcorn.PairingLimit (2.8s)
+✔ [3225/3238] Built Runcorn.Series (4.2s)
+✔ [3226/3238] Built Runcorn.MomentNecessity (2.4s)
+✔ [3227/3239] Built Runcorn.LowAngularForm (3.8s)
+✔ [3228/3239] Built Runcorn.FiniteMoments (3.6s)
+✔ [3229/3239] Built Runcorn.GradientDecomposition (4.3s)
+✔ [3230/3239] Built Runcorn.SphericalCompleteness (4.4s)
+✔ [3231/3239] Built Runcorn.HighMoments (4.7s)
+✔ [3232/3239] Built Runcorn.RadialSeries (7.1s)
+✔ [3233/3248] Built Runcorn.InteriorEstimate (5.0s)
+✔ [3296/3303] Built Runcorn.ModeTests (5.3s)
+✔ [3297/3309] Built Runcorn.AngularSufficiency (3.4s)
+✔ [3301/3312] Built Runcorn.ExpansionTests (3.0s)
+✔ [3304/3316] Built Runcorn.ModeSpans (2.0s)
+✔ [3305/3316] Built Runcorn.GradientApproximation (5.0s)
+✔ [3306/3316] Built Runcorn.ProductSeries (8.5s)
+✔ [3307/3316] Built Runcorn.MaximumPrinciple (4.7s)
+✔ [3308/3316] Built Runcorn.ExteriorAsymptotics (3.7s)
+✔ [3309/3316] Built Runcorn.FiniteModeTests (5.1s)
+✔ [3310/3316] Built Runcorn.FixedForward (2.9s)
+✔ [3311/3316] Built Runcorn.ApproximateTests (3.4s)
+✔ [3312/3316] Built Runcorn.PlanarExterior (3.9s)
+✔ [3313/3316] Built Runcorn.HarmonicApproximation (3.2s)
+✔ [3314/3316] Built Runcorn.Sufficiency (3.2s)
+✔ [3315/3316] Built Solution (3.0s)
+Build completed successfully (3316 jobs).
+
+$ LEAN_NUM_THREADS=4 lake build
+⚠ [3316/3322] Replayed Challenge
+warning: Challenge.lean:177:8: declaration uses `sorry`
+warning: Challenge.lean:183:8: declaration uses `sorry`
+✔ [3319/3322] Built Runcorn.Dimension (3.3s)
+✔ [3320/3322] Built Runcorn.BasisExistence (11s)
+✔ [3321/3322] Built Runcorn (2.5s)
+Build completed successfully (3322 jobs).
+Exit status 0

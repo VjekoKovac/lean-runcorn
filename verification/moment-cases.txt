@@ -1,0 +1,4 @@
+'Review.planarLow' depends on axioms: [propext, Quot.sound]
+'Review.planarDegreeTwo' depends on axioms: [propext, Quot.sound]
+'Review.spatialDegreeOne' depends on axioms: [propext, Quot.sound]
+'Review.spatialDegreeTwo' depends on axioms: [propext, Quot.sound]

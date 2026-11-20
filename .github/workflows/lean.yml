@@ -1,0 +1,65 @@
+name: Lean build
+
+"on":
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Build and verify both theorems
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    env:
+      LEAN_NUM_THREADS: 2
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+
+      - uses: leanprover/lean-action@ba3fdfe5c4476c925da13bf11a005ddb47e47aee # v1
+        with:
+          auto-config: "false"
+          use-github-cache: "false"
+          use-mathlib-cache: "false"
+
+      - name: Fetch the pinned Mathlib dependencies used here
+        shell: bash
+        run: |
+          mapfile -t modules < <(awk '/^(public )?import Mathlib\./ {print $NF}' \
+            Challenge.lean Runcorn/*.lean | sort -u)
+          lake exe cache get "${modules[@]}"
+          python3 scripts/check-revisions.py
+
+      - name: Verify the reference and the comparator targets
+        run: python3 scripts/check-source.py
+
+      - name: Build the Lean project
+        run: lake build
+
+      - name: Check the axiom dependencies and low-degree examples
+        shell: bash
+        run: |
+          lake env lean Axioms.lean | tee /tmp/runcorn-axioms.log
+          python3 scripts/audit-axioms.py --check /tmp/runcorn-axioms.log
+          lake env lean verification/MomentCases.lean
+
+      - name: Set up the pinned comparator sandbox
+        shell: bash
+        env:
+          PALOMAR_REV: 14aa8d6b3c2f14a8540605e37144560b9a00e7e7
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends meson ninja-build libcap-dev apparmor
+          installer="$RUNNER_TEMP/install-bwrap.sh"
+          curl --fail --silent --show-error --location --retry 3 \
+            "https://raw.githubusercontent.com/PalomarRegistry/PalomarSubmission/$PALOMAR_REV/scripts/install_bwrap.sh" -o "$installer"
+          echo "c290df6cebdf1cb26edb69ed4164d9551062bfeb65243b93d1d1d3b77eac0a35  $installer" | sha256sum --check
+          bwrap_path=$(bash "$installer" "$RUNNER_TEMP/runcorn-bwrap")
+          echo "COMPARATOR_BWRAP=$bwrap_path" >> "$GITHUB_ENV"
+
+      - name: Compare both theorems with Lean, NanoDa, and con-ron
+        run: bash scripts/replay-kernels.sh

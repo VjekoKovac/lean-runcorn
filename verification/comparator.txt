@@ -1,0 +1,20 @@
+$ bash verification/host/run.sh bash scripts/replay-kernels.sh
+Resolving dependencies
+Building Challenge
+⚠ [2861/2862] Replayed Challenge
+warning: Challenge.lean:177:8: declaration uses `sorry`
+warning: Challenge.lean:183:8: declaration uses `sorry`
+Build completed successfully (2862 jobs).
+Exporting #[Quot, Quot.mk, Quot.lift, Quot.ind, Runcorn.varyingAnnuli, Runcorn.fixedAnnulus, propext, Classical.choice, Quot.sound, Nat.add, Nat.sub, Nat.mul, Nat.pow, Nat.gcd, Nat.div, Nat.mod, Nat.beq, Nat.ble, Nat.land, Nat.lor, Nat.xor, Nat.shiftLeft, Nat.shiftRight, String.ofList, Char.ofNat, List, eagerReduce, Nat, String, String.mk, Char, optParam, autoParam, semiOutParam, outParam] from Challenge
+Building Solution
+Build completed successfully (3314 jobs).
+Exporting #[Quot, Quot.mk, Quot.lift, Quot.ind, Runcorn.varyingAnnuli, Runcorn.fixedAnnulus, propext, Classical.choice, Quot.sound, Nat.add, Nat.sub, Nat.mul, Nat.pow, Nat.gcd, Nat.div, Nat.mod, Nat.beq, Nat.ble, Nat.land, Nat.lor, Nat.xor, Nat.shiftLeft, Nat.shiftRight, String.ofList, Char.ofNat, List, eagerReduce, Nat, String, String.mk, Char, optParam, autoParam, semiOutParam, outParam] from Solution
+Running con-ron kernel on solution
+con-ron: accepted 59732 declarations (--verified)
+con-ron kernel accepts the solution
+Running nanoda kernel on solution
+nanoda kernel accepts the solution
+Running Lean default kernel on solution
+Lean default kernel accepts the solution
+Your solution is okay!
+Exit status 0

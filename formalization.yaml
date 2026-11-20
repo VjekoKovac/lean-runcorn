@@ -1,0 +1,114 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: v0.4
+project:
+  name: "A converse to generalized Runcorn's theorem"
+  description: >-
+    Fix an integer n ≥ 2 and real radii 0 < r₋ < r₊. Write S = {x ∈ ℝⁿ : r₋ < |x| < r₊},
+    A(a,b) = {x ∈ ℝⁿ : a ≤ |x| ≤ b}, and S(r) = {x ∈ ℝⁿ : |x| = r}.
+    A test pair consists of complex harmonic functions u on {|x| < r₊} and v on
+    {|x| > r₋}, with v(x) → 0 as |x| → ∞. Write B(u,v) = ∇u · ∇v for the
+    complex bilinear dot product.
+
+    Theorem 1 (varying annuli). For every continuous f : S → ℂ, the following
+    three conditions are equivalent. (i) For every r₋ < a < b < r₊ and every
+    test pair, the volume integral of f B(u,v) over A(a,b) is zero.
+    (ii) For every r₋ < r < r₊ and every test pair, the surface integral of
+    f B(u,v) over S(r) is zero. (iii) In dimensions n ≥ 3, f is radial on S.
+    In dimension n = 2, there exist continuous functions g₋₁, g₀, g₁ from
+    (r₋,r₊) to ℂ such that f(r cos θ, r sin θ) =
+    g₋₁(r) exp(−iθ) + g₀(r) + g₁(r) exp(iθ) for every r ∈ (r₋,r₊) and θ ∈ ℝ.
+
+    Theorem 2 (fixed annulus). Fix r₋ < a < b < r₊. In every degree k ≥ 0,
+    choose any orthogonal basis (Yₖⱼ)ⱼ of the complex spherical harmonics of
+    degree k on the unit sphere, with respect to surface area. For every
+    f ∈ L²(A(a,b), dV; ℂ), the volume integral of f B(u,v) over A(a,b) is zero
+    for every test pair if and only if there exist coefficients
+    gₖⱼ ∈ L²([a,b], r^(n−1) dr; ℂ) with both of the following properties.
+    The sums over 0 ≤ k < N and all basis indices j of gₖⱼ(|x|) Yₖⱼ(x/|x|)
+    converge to f in L²(A(a,b), dV) as N → ∞. For each k and j,
+    ∫ₐᵇ gₖⱼ(r) r^m r^(n−1) dr = 0 for every exponent m in the following ranges.
+    In dimension n = 2 and degree k ≥ 2, m = 2ℓ−k for integers 0 ≤ ℓ ≤ k−2.
+    In dimensions n ≥ 3 and degree k ≥ 1, m = 2ℓ−k−n+2 for integers
+    0 ≤ ℓ ≤ k−1. The exponent set is empty for k = 0 in every dimension and
+    for k = 1 in dimension two.
+  authors: ["Vjekoslav Kovač", "Ivica Smolić"]
+  responsible_maintainers: ["Vjekoslav Kovač"]
+  license: Apache-2.0
+classification:
+  arxiv: [math-ph]
+  msc2020: [86A22, 86A25, 33C55, 43A90]
+sources:
+  - title: "A converse to generalized Runcorn's theorem"
+    type: paper
+    authors: ["Vjekoslav Kovač", "Ivica Smolić"]
+    id: "arXiv:2607.18379v1"
+    location: "https://arxiv.org/abs/2607.18379v1"
+    relationship: formalizes
+    note: "Original source, 20 July 2026. Section 1.2, Theorems 1 and 2."
+status:
+  scope: >-
+    Both introduction theorems, in all their stated dimensions and for
+    arbitrary admissible harmonic pairs. The examples and geophysical
+    discussion in the paper are outside the compared results.
+  # Reference-only theorem bodies are excluded from the implementation count.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: [propext, Classical.choice, Quot.sound]
+  main_results:
+    - declaration: Runcorn.varyingAnnuli
+      file: Solution.lean
+      sorry_count: 0
+      axioms: [propext, Classical.choice, Quot.sound]
+      comparator_config: comparator.json
+    - declaration: Runcorn.fixedAnnulus
+      file: Solution.lean
+      sorry_count: 0
+      axioms: [propext, Classical.choice, Quot.sound]
+      comparator_config: comparator.json
+automation:
+  methods:
+    - method: agent
+      models: ["OpenAI Codex (GPT-6 family)"]
+      framework: "ChatGPT Work Mode"
+      tool_setup: "Separate AI tasks for statement translation, source comparison, proof components, integration, and replay."
+  notes: >-
+    AI agents prepared the Lean code and documentation. The named human
+    authors are the source and formalization authors as specified by the
+    requester. No human review or registry decision is recorded.
+review:
+  status: agent-reviewed
+  reviewers: ["OpenAI Codex agents (AI)"]
+  notes: >-
+    An AI reviewer checked the frozen Challenge and the implementation
+    assertions against the uploaded manuscript and the original arXiv
+    source. Two reviewers describe which modules they wrote and which
+    they reviewed independently. See docs/statement-review.md and
+    docs/proof-review.md. Kernel and comparator evidence is in verification/.
+alignment:
+  namespace: Runcorn
+  statements:
+    - source: "Theorem 1"
+      lean: Runcorn.varyingAnnuli
+      module: Solution
+      status: proved
+      note: "The equivalences include radiality for n ≥ 3 and the exceptional modes for n = 2."
+    - source: "Theorem 2"
+      lean: Runcorn.fixedAnnulus
+      module: Solution
+      status: proved
+      note: "Any chosen degree-wise orthogonal basis, all fixed-shell moments, and convergence in L²."
+fidelity:
+  divergences: >-
+    The null-cone divisibility step uses the Hilbert Nullstellensatz and
+    squarefreeness. The varying-shell proof applies the necessary-moment
+    argument directly on each subannulus. In the sufficiency proof, finite
+    solid and Kelvin modes approximate on slightly larger compact sets by
+    spherical polynomial approximation and a maximum principle. A cutoff
+    energy identity gives the L² gradient approximation needed to pass
+    to the two test limits successively. The original proof uses classical
+    spherical-harmonic series with uniform convergence of first derivatives.
+acknowledgements: >-
+  The mathematical results and source proofs are due to Kovač and Smolić.
+  The Lean and Mathlib communities provide the kernel, elaborator, and
+  imported library proofs. The project structure follows roos-j/lean-dfr
+  and the Palomar submission conventions. See docs/reuse.md.
